@@ -1,9 +1,17 @@
 <?php
 
+use App\Http\Controllers\About;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\Articles;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SelamatDatang;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\PhotoController;
 
-Route::get('/hello', function () { return 'Hello World';
-});
+
+// Route::get('/hello', function () { return 'Hello World';
+// });
 
 Route::get('/world', function () { return 'World';
 });
@@ -32,6 +40,18 @@ Route::get('/userr/{name?}', function ($name='John') {
 Route::get('/userrr/profile', function() {
     //
     })->name('profile');    
+
+Route::get('/helloo', [WelcomeController::class,'hello']);
+Route::get('/selamatDatang', [SelamatDatang::class,'index']);
+Route::get('/aboutt', [About::class,'about']);
+Route::get('/Articless/{id}', [Articles::class,'articles']);
+Route::get('/Home', [HomeController::class,'index']);
+Route::get('/About', [AboutController::class,'about']);
+Route::get('/Articlesss/{id}', [Articles::class,'articles']);
+
+Route::resource('photos', PhotoController::class);
+Route::resource('photos', PhotoController::class)->only([ 'index', 'show']);
+Route::resource('photos', PhotoController::class)->except([ 'create', 'store', 'update', 'destroy']);
 
     // Route::middleware(['first', 'second'])->group(function () { Route::get('/', function () {
     //     // Uses first & second middleware...
